@@ -2,6 +2,8 @@ package com.dahal.w2d2petshelter.controllers;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,6 +33,13 @@ public class PetApiController {
 		Pet p = new Pet(name, age, ownerName);
 		return this.petService.createPet(p);
 	}
+	
+	@GetMapping("/api/pet/{id}")
+	public Pet getOnePet(@PathVariable("id") Long id) {
+		return this.petService.getOnePet(id);
+	}
+	
+	
 	
 	
 }

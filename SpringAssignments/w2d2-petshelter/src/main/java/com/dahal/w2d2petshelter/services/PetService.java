@@ -26,6 +26,16 @@ public class PetService {
 		return this.petRepo.save(p);
 	}
 	
+	//get one pet
+	public Pet getOnePet(Long id) {
+		return this.petRepo.findById(id).orElse(null);
+	}
+	
+	
+	//update a pet
+	public Pet updatePet(Pet p) {
+		return this.petRepo.save(p);
+	}
 	
 	
 	

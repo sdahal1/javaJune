@@ -24,15 +24,15 @@ public class Pet {
 	 private Long id;
 	 
 	 @NotNull
-	 @Size(min=2)
+	 @Size(min=2, message="name must be at least 2 characters long")
 	 private String name;
 	 
 	 @NotNull
-	 @Min(0)
+	 @Min(value = 0, message = "Age cannot be less than 0, thats like not even born yet tho")
 	 private Integer age;
 	 
 	 @NotNull
-	 @Size(min=2)
+	 @Size(min=2, message="Owner name must be at least 2 characters long")
 	 private String ownerName;
 
 	 
