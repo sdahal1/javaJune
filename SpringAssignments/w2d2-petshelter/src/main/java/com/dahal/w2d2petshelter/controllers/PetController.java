@@ -20,7 +20,7 @@ import com.dahal.w2d2petshelter.services.PetService;
 @Controller
 public class PetController {
 	
-private final PetService petService;
+	private final PetService petService;
 	
 	public PetController(PetService petService) {
 		this.petService= petService;
@@ -75,6 +75,12 @@ private final PetService petService;
 //            bookService.updateBook(book);
             return "redirect:/pets";
         }
+	}
+	
+	@GetMapping("/pets/{id}/delete")
+	public String delete(@PathVariable("id") Long id) {
+		this.petService.deletePet(id);
+		return "redirect:/pets";
 	}
 	
 	

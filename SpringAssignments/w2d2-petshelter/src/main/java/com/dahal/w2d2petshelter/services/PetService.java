@@ -37,6 +37,11 @@ public class PetService {
 		return this.petRepo.save(p);
 	}
 	
+	//delete a pet
+	public void deletePet(Long id) {
+		this.petRepo.deleteById(id);
+	}
+	
 	
 	
 	

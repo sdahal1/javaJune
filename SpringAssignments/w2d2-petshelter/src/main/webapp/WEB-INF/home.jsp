@@ -12,7 +12,7 @@
 </head>
 <body>
     <h1>Hello World. Lets put this wonderful pets into a home.</h1>
-    <h3>All the pets: ${allPets}</h3>
+    <h3>All the pets:</h3>
     <table class="table table-dark">
         <thead>
           <tr>
@@ -30,7 +30,7 @@
             <td>${pet.name}</td>
             <td>${pet.age}</td>
             <td>${pet.getOwnerName()}</td>
-            <td><a href="/pets/${pet.id}">View</a>|| <a href="/pets/${pet.id}/edit">Edit</a> || <a href="">Delete</a></td>
+            <td><a href="/pets/${pet.id}">View</a>|| <a href="/pets/${pet.id}/edit">Edit</a> || <a href="/pets/${pet.id}/delete">Delete</a></td>
           </tr>
         </c:forEach>
         </tbody>
@@ -43,7 +43,7 @@
             <p>
                 <form:label path="name">Name</form:label>
                 <form:errors path="name"/>
-                <form:input path="name"/>
+                <form:input type = "text" path="name"/>
             </p>
             <p>
                 <form:label path="age">age</form:label>
