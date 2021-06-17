@@ -32,7 +32,7 @@ public class Player {
 	@Size(min=2, max=100, message= "Last name must be between 2-100 characters")
 	private String last_name;
 	
-	
+	@NotNull(message="Age is required")
 	@Min(value = 15, message = "Age cannot be less than 15.")
 	private Integer age;
 	

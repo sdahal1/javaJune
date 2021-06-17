@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -29,7 +30,7 @@ public class Team {
 	@Size(min=2, max=100, message= "Team name must be between 2-100 characters")
 	private String name;
 	
-	@NotNull(message = "City may not be null")
+	@NotBlank(message = "City may not be null")
 	private String city;
 	
 	
