@@ -38,6 +38,7 @@ class DLL {
           newNode.prev = this.tail;
           this.tail = newNode;
         }
+        return this;
   
   
       }
@@ -51,6 +52,29 @@ class DLL {
 
       }
 
+    printValuesForward(){
+        let runner = this.head;
+        let result = ""
+        while(runner != null){
+            result += `${runner.value}->`;
+
+            runner = runner.next;
+        }
+        console.log(result);
+        return this;
+    }
+
+    printValuesBackward(){
+        let runner = this.tail;
+        let result = ""
+        while(runner != null){
+            result += `${runner.value}->`;
+            runner = runner.prev;
+        }
+        console.log(result);
+        return this;
+    }
+
 
     //friday
     removefront(){
@@ -63,11 +87,31 @@ class DLL {
 
 
     reverse(){
+      let runner = this.head;
+      let backward = this.tail;
+      while(runner!=backward && runner.prev !=backward){
+        let temp = runner.value
+        runner.value = backward.value
+        backward.value= temp
+        runner = runner.next
+        backward = backward.prev
+      }
+      return this
 
     }
+
+
+    recurseReverse(runner = this.head){
+      if(runner === null){
+          [this.head, this.tail] = [this.tail, this.head];
+          return this;
+      }
+      [runner.prev, runner.next] = [runner.next, runner.prev];
+      return this.recurseReverse(runner.prev);
+  }
 }
 
 
 
 let dl1 = new DLL();
-dl1.addfront(8).addfront(5).addfront(12).addback(99)
+dl1.addfront(8).addfront(5).addfront(12).addback(99).printValuesForward().reverse().printValuesForward().printValuesBackward()
