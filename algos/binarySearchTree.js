@@ -43,6 +43,15 @@ class BST{
         return this;
     }
 
+
+    findMin(){
+
+    }
+
+    findMax(){
+        
+    }
+
     printTree(node){
         console.log("Current node = ", node.value);
         if(node.left!=null){

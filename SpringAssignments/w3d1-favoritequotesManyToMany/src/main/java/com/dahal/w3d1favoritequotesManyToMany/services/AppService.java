@@ -52,5 +52,18 @@ public class AppService {
 		//save the newly updated quote object to the db
 		this.quoteRepo.save(q);
 	}
+	
+	//find one user
+	public User findOneUser(Integer id) {
+		Long id2 = Long.valueOf(id);
+		return this.userRepo.findById(id2).orElse(null);
+	}
+	
+	
+	//find selected 
+	public void testing(User u) {
+		System.out.println("***********");
+		System.out.println(this.quoteRepo.findByusersWhoLikeNotContaining(u));
+	}
 
 }

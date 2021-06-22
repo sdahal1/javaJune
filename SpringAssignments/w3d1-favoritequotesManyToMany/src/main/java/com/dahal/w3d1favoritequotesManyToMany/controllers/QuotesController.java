@@ -30,6 +30,8 @@ public class QuotesController {
 		List<Quote> allQuotes = this.appService.findAllQuotes();
 		
 		model.addAttribute("allQuotes", allQuotes);
+		
+		
 		return "home.jsp";
 	}
 	
@@ -55,7 +57,8 @@ public class QuotesController {
 		List<User> allUsers = this.appService.findAllUsers();
 		
 		model.addAttribute("allUsers", allUsers);
-		
+		User u = this.appService.findOneUser(2);
+		this.appService.testing(u);
 		return "quoteInfo.jsp";
 	}
 	
