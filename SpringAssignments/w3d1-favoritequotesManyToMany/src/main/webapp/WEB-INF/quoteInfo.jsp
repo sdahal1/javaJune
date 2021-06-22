@@ -27,7 +27,7 @@
     <h3>Add a User as one of the favoriters of this quote</h3>
     <form action="/addUserToQuote/${quoteToShow.id}" method="post">
         <select name="selected_user" id="">
-            <c:forEach items='${ allUsers }' var='u'>
+            <c:forEach items='${ nonFavUsers }' var='u'>
                 <option value="${u.id}">${u.name}</option>
             </c:forEach>
         </select>

@@ -57,8 +57,11 @@ public class QuotesController {
 		List<User> allUsers = this.appService.findAllUsers();
 		
 		model.addAttribute("allUsers", allUsers);
-		User u = this.appService.findOneUser(2);
-		this.appService.testing(u);
+		
+		//THIS IS NEW FOR THE NON FAVORITE USERS
+		List<User> nonFavoriteUsers = this.appService.findUsersWhoAreNotFavoritorsOfQuote(q);
+		model.addAttribute("nonFavUsers", nonFavoriteUsers);
+		
 		return "quoteInfo.jsp";
 	}
 	

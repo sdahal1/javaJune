@@ -60,10 +60,9 @@ public class AppService {
 	}
 	
 	
-	//find selected 
-	public void testing(User u) {
-		System.out.println("***********");
-		System.out.println(this.quoteRepo.findByusersWhoLikeNotContaining(u));
+	//find users who are not favoritors to a quote
+	//THIS IS NEW FOR THE NON FAVORITE USERS
+	public List<User> findUsersWhoAreNotFavoritorsOfQuote(Quote q){
+		return this.userRepo.findByfavQuotesNotContaining(q);
 	}
-
 }

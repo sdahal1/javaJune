@@ -5,10 +5,11 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import com.dahal.w3d1favoritequotesManyToMany.models.Quote;
 import com.dahal.w3d1favoritequotesManyToMany.models.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
-
-	List<User> findByusersWhoLikeNotContaining(Quote q);
+	//THIS IS NEW FOR THE NON FAVORITE USERS
+	List<User> findByfavQuotesNotContaining(Quote q);
 }
