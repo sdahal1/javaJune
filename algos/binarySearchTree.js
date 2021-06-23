@@ -49,7 +49,7 @@ class BST{
     }
 
     findMax(){
-        
+
     }
 
     printTree(node){
@@ -63,9 +63,46 @@ class BST{
             this.printTree(node.right);
         }
     }
+
+    contains(value){
+        if(this.root== null){
+            console.log("This tree is empty, it doesn't contain anything")
+            return false
+        }else{
+            let current = this.root
+            while(current!= null){
+                //if the value is in the current node
+                if(value== current.value){
+                    return true
+                }else if (value > current.value){
+                    current = current.right;
+                }else{
+                    current = current.left;
+                }
+            }
+
+            return false
+
+
+        }
+        
+
+    }
+
+    size(node){
+        if(node ==null){
+            console.log("no size");
+            return false
+        }else{
+            return (this.size(node.left) + 1 + this.size(node.right))
+        }
+    }
 }
 
 
 
 let bst1 = new BST()
-bst1.add(12).add(15).add(10).add(11).printTree(bst1.root)
+bst1.add(12).add(15).add(10).add(11)
+console.log(bst1.contains(23)) //return false
+console.log(bst1.contains(12)) //return true
+console.log(bst1.size(bst1.root)) //4
