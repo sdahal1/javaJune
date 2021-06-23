@@ -43,19 +43,27 @@ public class UserService {
         if(result.hasErrors()) {
             return null;
         }
-        Optional<User> potentialUser = userRepo.findByEmail(newLogin.getEmail());
+        //search the database for a user who has the same email as the one typed in the login form (newLogin.getEmail())
+        Optional<User> potentialUser = this.userRepo.findByEmail(newLogin.getEmail());
+        //if the email is not found, then the variable "potentialUser does not contain a user object and we create a custom validation error for "Unknown email"
         if(!potentialUser.isPresent()) {
             result.rejectValue("email", "Unique", "Unknown email!");
             return null;
         }
-        User user = potentialUser.get();
-        if(!BCrypt.checkpw(newLogin.getPassword(), user.getPassword())) {
-            result.rejectValue("password", "Matches", "Invalid Password!");
+        //at this point if the application request gets this far, then that means the email was found, and we need to see if the password matches
+        User user = potentialUser.get(); //getting the user object whose email matches 
+        if(!BCrypt.checkpw(newLogin.getPassword(), user.getPassword())) { //using Bcrypt to check if the password for that account matches the password stored in the db
+            result.rejectValue("password", "Matches", "Invalid Password!"); //password didnt match, create an validation error message
         }
         if(result.hasErrors()) {
             return null;
         } else {
+        	//at this point, email was found and password matches, successful login can occur 
             return user;
         }
+    }
+    
+    public User findOneUser(Long id) {
+    	return this.userRepo.findById(id).orElse(null);
     }
 }

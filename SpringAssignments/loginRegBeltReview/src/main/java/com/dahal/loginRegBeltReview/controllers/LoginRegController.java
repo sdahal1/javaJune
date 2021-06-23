@@ -23,9 +23,9 @@ public class LoginRegController {
 
     
     @GetMapping("/")
-    public String index(Model model, @ModelAttribute("newUser") User user) {
+    public String index(Model model, @ModelAttribute("newUser") User user, @ModelAttribute("newLogin") LoginUser loginUser ) {
 //        model.addAttribute("newUser", new User());
-        model.addAttribute("newLogin", new LoginUser());
+//        model.addAttribute("newLogin", new LoginUser());
         return "index.jsp";
     }
     
@@ -47,13 +47,38 @@ public class LoginRegController {
     @PostMapping("/login")
     public String login(@Valid @ModelAttribute("newLogin") LoginUser newLogin, 
             BindingResult result, Model model, HttpSession session) {
-        User user = userServ.login(newLogin, result);
+        User user = this.userServ.login(newLogin, result);
         if(result.hasErrors()) {
             model.addAttribute("newUser", new User());
             return "index.jsp";
         }
+        
+        //if there are no errors, and the form info is all valid, then we use sesssion to store the users information to log them in
         session.setAttribute("user_id", user.getId());
         return "redirect:/home";
     }
+    
+    @GetMapping("/home")
+    public String home(HttpSession session, Model model) {
+    	System.out.println("**************");
+    	System.out.println(session.getAttribute("user_id"));
+    	System.out.println("**************");
+    	if(session.getAttribute("user_id") == null) {
+    		return "redirect:/";
+    	}
+    	//use session to retrieve the id of the logged in user or newly registered user 
+    	Long loggedInId = (Long)session.getAttribute("user_id");
+    	//use the retrieved id to find a user from the database who has that id, so we can send that user's information to the template
+    	User loggedInUserObj = this.userServ.findOneUser(loggedInId);
+    	model.addAttribute("loggedInUser", loggedInUserObj);
+    	return "dashboard.jsp";
+    }
+    
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+    	session.removeAttribute("user_id");
+    	return "redirect:/";
+    }
+    
 
 }
