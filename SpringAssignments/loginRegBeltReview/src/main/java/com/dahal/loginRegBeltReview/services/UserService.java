@@ -1,5 +1,6 @@
 package com.dahal.loginRegBeltReview.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -8,16 +9,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import com.dahal.loginRegBeltReview.models.LoginUser;
+import com.dahal.loginRegBeltReview.models.Menu;
 import com.dahal.loginRegBeltReview.models.User;
+import com.dahal.loginRegBeltReview.repositories.MenuRepository;
 import com.dahal.loginRegBeltReview.repositories.UserRepository;
 
 @Service
 public class UserService {
 	@Autowired
     private UserRepository userRepo;
+	
+	@Autowired
+	private MenuRepository menuRepo;
     
-//    public UserService(UserRepository userRepo) {
-//    	this.userRepo = userRepo;
+//    public UserService(UserRepository userRepo, MenuRepository menuRepo ) {
+//    		this.userRepo = userRepo;
+//    		this.menuRepo = menuRepo;
 //    }
 
     
@@ -64,6 +71,16 @@ public class UserService {
     }
     
     public User findOneUser(Long id) {
-    	return this.userRepo.findById(id).orElse(null);
+    		return this.userRepo.findById(id).orElse(null);
     }
+    
+    
+    
+    
+    ///METHODS FOR THE MENU OPERATIONS
+    public List<Menu> findAllMenuItems(){
+    		return (List<Menu>)this.menuRepo.findAll();
+    }
+    
+    
 }

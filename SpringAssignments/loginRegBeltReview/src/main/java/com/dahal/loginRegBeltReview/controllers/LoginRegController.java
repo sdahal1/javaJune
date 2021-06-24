@@ -1,5 +1,7 @@
 package com.dahal.loginRegBeltReview.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.dahal.loginRegBeltReview.models.LoginUser;
+import com.dahal.loginRegBeltReview.models.Menu;
 import com.dahal.loginRegBeltReview.models.User;
 import com.dahal.loginRegBeltReview.services.UserService;
 
@@ -64,6 +67,7 @@ public class LoginRegController {
     	System.out.println(session.getAttribute("user_id"));
     	System.out.println("**************");
     	if(session.getAttribute("user_id") == null) {
+    		
     		return "redirect:/";
     	}
     	//use session to retrieve the id of the logged in user or newly registered user 
@@ -71,11 +75,18 @@ public class LoginRegController {
     	//use the retrieved id to find a user from the database who has that id, so we can send that user's information to the template
     	User loggedInUserObj = this.userServ.findOneUser(loggedInId);
     	model.addAttribute("loggedInUser", loggedInUserObj);
+    	
+    	
+    	//passing all the menu items to the template. first we need to get the menu items by using the service
+    	List<Menu> allMenuItems = this.userServ.findAllMenuItems();
+    	model.addAttribute("allMenuItems", allMenuItems);
+    	
     	return "dashboard.jsp";
     }
     
     @GetMapping("/logout")
     public String logout(HttpSession session) {
+    	
     	session.removeAttribute("user_id");
     	return "redirect:/";
     }

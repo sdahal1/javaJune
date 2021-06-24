@@ -11,6 +11,7 @@
 </head>
 <body>
     <h1>Login and Registration</h1>
+    <p>${error}</p>
     <form:form action="/register" method="post" modelAttribute="newUser">
         <div class="form-group">
             <label>User Name:</label>

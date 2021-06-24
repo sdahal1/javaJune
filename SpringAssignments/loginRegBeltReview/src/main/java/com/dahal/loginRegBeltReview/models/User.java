@@ -1,9 +1,13 @@
 package com.dahal.loginRegBeltReview.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Email;
@@ -35,6 +39,11 @@ public class User {
     @NotEmpty(message="Confirm Password is required!")
     @Size(min=8, max=128, message="Confirm Password must be between 8 and 128 characters")
     private String confirm;
+	
+	//onee to many with menu
+	@OneToMany(mappedBy="uploader", fetch = FetchType.LAZY)
+    private List<Menu> itemsUploaded;
+	
 	
 	//empty constructor
 	public User() {
@@ -87,6 +96,15 @@ public class User {
 	public void setConfirm(String confirm) {
 		this.confirm = confirm;
 	}
+
+	public List<Menu> getItemsUploaded() {
+		return itemsUploaded;
+	}
+
+	public void setItemsUploaded(List<Menu> itemsUploaded) {
+		this.itemsUploaded = itemsUploaded;
+	}
+	
 	
 	
 	

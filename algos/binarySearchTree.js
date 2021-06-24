@@ -45,11 +45,21 @@ class BST{
 
 
     findMin(){
-
+        let runner = this.root;
+        while(runner.left !== null) {
+            runner = runner.left;
+        }
+        console.log(runner.value);  
+        return this;
     }
 
     findMax(){
-
+        let runner = this.root;
+        while(runner.right !== null) {
+            runner = runner.right;
+        }
+        console.log(runner.value);
+        return this;
     }
 
     printTree(node){
@@ -97,12 +107,72 @@ class BST{
             return (this.size(node.left) + 1 + this.size(node.right))
         }
     }
+
+    height(node){
+        if(node==null){
+            return 0
+        }else{
+            let leftHeight = this.height(node.left)
+            let rightHeight = this.height(node.right)
+            if(leftHeight > rightHeight){
+                return leftHeight +1
+            }else{
+                return rightHeight +1
+            }
+        }
+    }
+
+    height2(node){
+        let leftcount = 1
+        let rightcount=1
+        if(node.right!=null && node.left!=null){ //we need to compare the lengths on the right and left
+            rightcount +=this.height(node.right)
+            leftcount +=this.height(node.left)
+        }
+        else if(node.right!= null){
+            rightcount += this.height(node.right)
+        }
+        else if(node.left != null){
+            leftcount += this.height(node.left)
+        }
+
+        console.log("leftcount: ", leftcount);
+        console.log("rightcount: ", rightcount)
+        if(leftcount>rightcount){
+            return leftcount
+        }else{
+            return rightcount
+        }
+    }
+
+    height3(node){
+        let left ;
+        let right;
+       if(node ==null){
+             return false
+         }else{
+              left = this.height(node.left) + 1;
+              right =this.height(node.right) + 1;
+         }
+         if(left>right){
+           return left;
+         }else{
+           return right;
+         }
+ 
+     }
+
+
+
+    
 }
 
 
 
 let bst1 = new BST()
-bst1.add(12).add(15).add(10).add(11)
+bst1.add(12).add(15).add(10).add(11).add(56).add(2).add(1)
 console.log(bst1.contains(23)) //return false
 console.log(bst1.contains(12)) //return true
-console.log(bst1.size(bst1.root)) //4
+console.log(bst1.size(bst1.root)) //7
+
+console.log("height is", bst1.height3(bst1.root)) //4
