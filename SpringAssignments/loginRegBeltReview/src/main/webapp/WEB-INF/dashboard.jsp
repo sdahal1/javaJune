@@ -26,13 +26,13 @@
             <c:forEach items='${ allMenuItems }' var='m'>
                 <tr>
                     <th scope="row">${m.id}</th>
-                    <td>${m.name}</td>
+                    <td><a href="/menu/${m.id}/info">${m.name}</a></td>
                     <td>${m.uploader.userName}</td>
-                    <td><a href="">Edit</a> || <a href="">Delete</a></td>
+                    <td><a href="/menu/${m.id}/edit">Edit</a> || <a href="/menu/${m.id}/delete">Delete</a></td>
                 </tr>
             </c:forEach>
         </tbody>
       </table>
-      <a href="">Add new Menu Item</a>
+      <a href="/menu/new">Add new Menu Item</a>
 </body>
 </html>

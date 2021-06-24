@@ -82,5 +82,25 @@ public class UserService {
     		return (List<Menu>)this.menuRepo.findAll();
     }
     
+    //create a menu item
+    public Menu createMenuItem(Menu m) {
+    		return this.menuRepo.save(m);
+    }
+    
+    //find one menu item
+    public Menu findOneMenuItem(Long id) {
+    		return this.menuRepo.findById(id).orElse(null);
+    }
+    
+    //update one menu item
+    public Menu updateOneMenuItem(Menu m) {
+    		return this.menuRepo.save(m);
+    }
+    
+    //deleete one menu item
+    public void deleteOneMenuItem(Long id) {
+    		this.menuRepo.deleteById(id);
+    }
+    
     
 }
